@@ -1,6 +1,7 @@
 'use client'
 // import Image from 'next/image'
 import  Question  from './Question';
+import { config } from './Constants';
 
 import { useEffect  } from 'react';
 import { useState } from 'react';
@@ -32,7 +33,7 @@ export default function Home() {
     }
 
     useEffect(() => {
-		fetch('/questions.json')
+		fetch(`${config.url.API_URL}questions.json`)
 		.then((res) => res.json())
 		.then((data) => {
             let questions = data.root;
