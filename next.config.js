@@ -17,7 +17,7 @@ if (isGithubActions) {
 
 const nextConfig = {
     output: 'export',
-    assetPrefix: !debug ? 'https://giper45.github.io/marcellaquestions/public' : '',
+    assetPrefix: !debug ? 'https://giper45.github.io/marcellaquestions/' : '',
     eslint: {
         ignoreDuringBuilds: true,
     },
