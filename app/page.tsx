@@ -26,10 +26,15 @@ import { getRandom } from './utils';
 export default function Home() {
     const [data, setData] = useState([]);
     const [currentQuestion, setCurrentQuestion] = useState({});
+    const [showAnswer, setShowAnswer] = useState(false);
+    const [answer, setAnswer] = useState('No answer available');
 
     function handleClick() {
         // Get a random question
-        setCurrentQuestion(data[getRandom(data.length)]);
+        setShowAnswer(false)
+        const q = data[getRandom(data.length)]
+        setCurrentQuestion(q);
+        setAnswer(q?.risposta)
     }
 
     useEffect(() => {
@@ -43,6 +48,11 @@ export default function Home() {
 		})
     }, []);
 
+    function onShowAnswer(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
+        setShowAnswer(true);
+    }
+
+
     return (
         <main className="text-center">
             <Question 
@@ -51,8 +61,18 @@ export default function Home() {
                 b = {currentQuestion?.b}
                 c = {currentQuestion?.c}
                 d = {currentQuestion?.d}
-                e = {currentQuestion?.e}
+                // e = {currentQuestion?.e}
     > </Question>
+    {showAnswer && (
+                        <div className="m-4 p-4 bg-gray-100 text-black rounded">
+                        {/* <strong>Answer:</strong> {currentQuestion?.answer || 'No answer available'} */}
+                        <strong>Answer:</strong> {answer}
+                    </div>
+
+    )}
+            <button className="bg-slate-500 text-sm hover:bg-slate-800 text-black hover:text-white font-bold py-2 px-4 mx-4 rounded-full" onClick={onShowAnswer}>
+                Show answer
+            </button>
             <button className="bg-slate-500 text-sm hover:bg-slate-800 text-black hover:text-white font-bold py-2 px-4 rounded-full" onClick={handleClick}>
               Next question
             </button>
